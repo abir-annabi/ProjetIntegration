@@ -6,6 +6,7 @@ use App\Repository\LocationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
 class Location
@@ -13,30 +14,39 @@ class Location
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['location:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['location:read', 'location:write'])]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groups(['location:read', 'location:write'])]
     private ?float $prix = null;
 
     #[ORM\Column]
+    #[Groups(['location:read', 'location:write'])]
     private ?int $superficie = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['location:read', 'location:write'])]
     private ?string $type = null;
 
     #[ORM\Column]
+    #[Groups(['location:read', 'location:write'])]
     private ?bool $disponibilite = null;
 
     #[ORM\Column]
+    #[Groups(['location:read', 'location:write'])]
     private ?bool $meuble = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['location:read', 'location:write'])]
     private ?string $adresse = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['location:read', 'location:write'])]
     private ?string $ville = null;
 
     /**
