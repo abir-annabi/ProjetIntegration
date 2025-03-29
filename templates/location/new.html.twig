@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Déposer une location{% endblock %}
+
+{% block body %}
+    <h1>Déposer une nouvelle location</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.prix) }}
+        {{ form_row(form.superficie) }}
+        {{ form_row(form.type) }}
+        {{ form_row(form.disponibilite) }}
+        {{ form_row(form.meuble) }}
+        {{ form_row(form.adresse) }}
+        {{ form_row(form.ville) }}
+        
+        <div class="form-group">
+            <label for="location_photos">Photos</label>
+            {{ form_widget(form.photos) }}
+            <small class="form-text text-muted">Ajoutez plusieurs photos de la location</small>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    {% block javascripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const photosCollection = document.querySelector('#location_photos');
+    const addPhotoButton = document.createElement('button');
+    addPhotoButton.type = 'button';
+    addPhotoButton.className = 'btn btn-secondary btn-sm';
+    addPhotoButton.textContent = 'Ajouter une photo';
+    
+    photosCollection.parentNode.insertBefore(addPhotoButton, photosCollection.nextSibling);
+    
+    addPhotoButton.addEventListener('click', function() {
+        const newPhotoInput = document.createElement('input');
+        newPhotoInput.type = 'file';
+        newPhotoInput.name = 'location[photos][]';
+        newPhotoInput.className = 'form-control-file mb-2';
+        
+        photosCollection.appendChild(newPhotoInput);
+    });
+});
+</script>
+{% endblock %}
+    
+    {{ form_end(form) }}
+{% endblock %}
