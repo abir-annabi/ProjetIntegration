@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PhotoRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: PhotoRepository::class)]
 class Photo
@@ -14,10 +15,12 @@ class Photo
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['photo:read'])] // Ajoutez cette ligne
     private ?string $chemin = null;
 
     #[ORM\ManyToOne(inversedBy: 'photos')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['photo:read'])] // Ajoutez cette ligne
     private ?Location $location = null;
 
     public function getId(): ?int
